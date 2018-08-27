@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">DrinkShop</string>
+
+    <string name="FACEBOOK_APP_ID">1672886402801408</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">07445596e126572cfe9c0bcfabf50374</string>
+
+
+    <string name="get_started">get started</string>
+    <string name="sign_in">Sign In</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="register">Register</string>
+</resources>
