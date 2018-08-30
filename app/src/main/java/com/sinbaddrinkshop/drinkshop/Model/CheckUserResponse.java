@@ -1,8 +1,9 @@
 package com.sinbaddrinkshop.drinkshop.Model;
 
 public class CheckUserResponse {
+
     private boolean exists;
-    private String error_message;
+    private String error_msg;
 
     public CheckUserResponse() {
     }
@@ -15,11 +16,12 @@ public class CheckUserResponse {
         this.exists = exists;
     }
 
-    public String getError_message() {
-        return error_message;
+    public String getError_msg() {
+        return error_msg;
     }
 
-    public void setError_message(String error_message) {
-        this.error_message = error_message;
+    public void setError_msg(String error_msg) {
+        this.error_msg = error_msg;
     }
+
 }

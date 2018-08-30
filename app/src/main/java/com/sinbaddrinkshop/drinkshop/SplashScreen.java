@@ -78,15 +78,20 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == REQUEST_CODE) {
             AccountKitLoginResult result = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
+
 
             if (result.getError() != null) {
                 Toast.makeText(this, "" + result.getError().getErrorType().getMessage(), Toast.LENGTH_LONG).show();
             } else if (result.wasCancelled()) {
+
                 Toast.makeText(this, "Cancel", Toast.LENGTH_LONG).show();
+
             } else {
                 if (result.getAccessToken() != null) {
+
                     final SpotsDialog alertDialog = new SpotsDialog(SplashScreen.this);
                     alertDialog.show();
                     alertDialog.setMessage("Please wait...");
@@ -96,26 +101,40 @@ public class SplashScreen extends AppCompatActivity {
                     AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
                         @Override
                         public void onSuccess(final Account account) {
-                            mService.checkUserExists(account.getPhoneNumber().toString())
+
+                            mService.checkUserExist(account.getPhoneNumber().toString())
                                     .enqueue(new Callback<CheckUserResponse>() {
                                         @Override
 
                                         public void onResponse(Call<CheckUserResponse> call, Response<CheckUserResponse> response) {
                                             CheckUserResponse userResponse = response.body();
+
                                             Log.d("response", userResponse.toString());
                                             System.out.print("hi imran");
-                                            if (userResponse.isExists()) {
-                                                //user already exits, just start activity
-                                                alertDialog.dismiss();
-                                            } else {
-                                                alertDialog.dismiss();
-                                                showRegisterDialog(account.getPhoneNumber().toString());
+
+
+                                            if (response.isSuccessful()) {
+                                                if (userResponse.isExists()) {
+                                                    alertDialog.dismiss();
+                                                } else {
+                                                    alertDialog.dismiss();
+                                                    showRegisterDialog(account.getPhoneNumber().toString());
+                                                }
+
                                             }
+//                                            if (userResponse.isExists()) {
+//                                                //user already exits, just start activity
+//                                                alertDialog.dismiss();
+//                                            } else {
+//                                                alertDialog.dismiss();
+//                                                showRegisterDialog(account.getPhoneNumber().toString());
+//                                            }
                                         }
 
                                         @Override
                                         public void onFailure(Call<CheckUserResponse> call, Throwable t) {
 
+                                            ToastMessage(t.getMessage());
                                         }
                                     });
                         }
@@ -134,8 +153,8 @@ public class SplashScreen extends AppCompatActivity {
     private void showRegisterDialog(final String phone) {
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(SplashScreen.this);
         alertDialog.setTitle("Register");
-        LayoutInflater layoutInflater = this.getLayoutInflater();
-        View register_layout = layoutInflater.inflate(R.layout.signup_activity, null);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View register_layout = inflater.inflate(R.layout.signup_activity, null);
 
 //        MaterialEditText name = (MaterialEditText)register_layout.findViewById(R.id.na);
 
@@ -178,7 +197,7 @@ public class SplashScreen extends AppCompatActivity {
                 watingDialog.setMessage("Please wait...");
 
 
-                mService.registerNewUser(phone,
+                mService.registerNameUser(phone,
                         edit_name.getText().toString(),
                         edit_country.getText().toString(),
                         edit_address.getText().toString())

@@ -1,21 +1,13 @@
 package com.sinbaddrinkshop.drinkshop.Model;
-
 public class User {
+
     private String phone;
     private String address;
     private String name;
-    private String Birthday;
-    private String error_msg;
+    private String birthdate;
+    private String error_msg; // it will empty  if user return object
 
     public User() {
-    }
-
-    public User(String phone, String address, String name, String birthday, String error_msg) {
-        this.phone = phone;
-        this.address = address;
-        this.name = name;
-        Birthday = birthday;
-        this.error_msg = error_msg;
     }
 
     public String getPhone() {
@@ -42,12 +34,12 @@ public class User {
         this.name = name;
     }
 
-    public String getBirthday() {
-        return Birthday;
+    public String getBirthdate() {
+        return birthdate;
     }
 
-    public void setBirthday(String birthday) {
-        Birthday = birthday;
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
     }
 
     public String getError_msg() {
@@ -57,4 +49,5 @@ public class User {
     public void setError_msg(String error_msg) {
         this.error_msg = error_msg;
     }
+
 }
