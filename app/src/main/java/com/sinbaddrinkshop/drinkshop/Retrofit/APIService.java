@@ -15,4 +15,9 @@ public interface APIService {
                             @Field("email") String email,
                             @Field("password") String password,
                             @Field("gender") String gender);
+
+    @FormUrlEncoded
+    @POST("login")
+    Call<Result> userLogin(@Field("email") String email,
+                           @Field("password") String password);
 }
