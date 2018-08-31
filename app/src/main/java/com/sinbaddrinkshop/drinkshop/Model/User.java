@@ -1,53 +1,52 @@
 package com.sinbaddrinkshop.drinkshop.Model;
+
 public class User {
 
-    private String phone;
-    private String address;
+    private int id;
     private String name;
-    private String birthdate;
-    private String error_msg; // it will empty  if user return object
+    private String email;
+    private String password;
+    private String gender;
 
-    public User() {
+    public User(String name, String email, String password, String gender) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
     }
 
-    public String getPhone() {
-        return phone;
+    public User(int id, String name, String email, String gender) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.gender = gender;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public User(int id, String name, String email, String password, String gender) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getEmail() {
+        return email;
     }
 
-    public String getBirthdate() {
-        return birthdate;
+    public String getPassword() {
+        return password;
     }
 
-    public void setBirthdate(String birthdate) {
-        this.birthdate = birthdate;
+    public String getGender() {
+        return gender;
     }
-
-    public String getError_msg() {
-        return error_msg;
-    }
-
-    public void setError_msg(String error_msg) {
-        this.error_msg = error_msg;
-    }
-
 }

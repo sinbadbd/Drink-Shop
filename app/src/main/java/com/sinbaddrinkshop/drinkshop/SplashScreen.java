@@ -158,11 +158,11 @@ public class SplashScreen extends AppCompatActivity {
 
 //        MaterialEditText name = (MaterialEditText)register_layout.findViewById(R.id.na);
 
-        final MaterialEditText edit_name = (MaterialEditText) register_layout.findViewById(R.id.edit_name);
-        final MaterialEditText edit_address = (MaterialEditText) register_layout.findViewById(R.id.edit_address);
-        final MaterialEditText edit_country = (MaterialEditText) register_layout.findViewById(R.id.edit_country);
+      //  final MaterialEditText edit_name = (MaterialEditText) register_layout.findViewById(R.id.edit_name);
+       // final MaterialEditText edit_address = (MaterialEditText) register_layout.findViewById(R.id.edit_address);
+       // final MaterialEditText edit_country = (MaterialEditText) register_layout.findViewById(R.id.edit_country);
 
-        final MaterialEditText edit_phone = (MaterialEditText) register_layout.findViewById(R.id.edit_phone);
+      //  final MaterialEditText edit_phone = (MaterialEditText) register_layout.findViewById(R.id.edit_phone);
 
         Button buttonRegister = (Button) register_layout.findViewById(R.id.buttonRegister);
 
@@ -172,52 +172,52 @@ public class SplashScreen extends AppCompatActivity {
 
                 alertDialog.create().dismiss();
 
-                if (TextUtils.isEmpty(edit_phone.getText().toString())) {
-                    ToastMessage("Please enter your name");
-                    return;
-                }
-
-                if (TextUtils.isEmpty(edit_name.getText().toString())) {
-                    ToastMessage("Please enter your Address");
-                    return;
-                }
-                if (TextUtils.isEmpty(edit_country.getText().toString())) {
-                    ToastMessage("Please enter your City");
-                    return;
-                }
-
-                if (TextUtils.isEmpty(edit_address.getText().toString())) {
-                    ToastMessage("Please enter your Country");
-                    return;
-                }
+//                if (TextUtils.isEmpty(edit_phone.getText().toString())) {
+//                    ToastMessage("Please enter your name");
+//                    return;
+//                }
+//
+//                if (TextUtils.isEmpty(edit_name.getText().toString())) {
+//                    ToastMessage("Please enter your Address");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(edit_country.getText().toString())) {
+//                    ToastMessage("Please enter your City");
+//                    return;
+//                }
+//
+//                if (TextUtils.isEmpty(edit_address.getText().toString())) {
+//                    ToastMessage("Please enter your Country");
+//                    return;
+//                }
 
 
                 final SpotsDialog watingDialog = new SpotsDialog(SplashScreen.this);
                 watingDialog.show();
                 watingDialog.setMessage("Please wait...");
 
-
-                mService.registerNameUser(phone,
-                        edit_name.getText().toString(),
-                        edit_country.getText().toString(),
-                        edit_address.getText().toString())
-                        .enqueue(new Callback<User>() {
-                            @Override
-                            public void onResponse(Call<User> call, Response<User> response) {
-                                watingDialog.dismiss();
-                                User user = response.body();
-                                if (TextUtils.isEmpty(user.getError_msg())) {
-
-                                    ToastMessage("Register Successfully");
-                                }
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<User> call, Throwable t) {
-                                watingDialog.dismiss();
-                            }
-                        });
+//
+//                mService.registerNameUser(phone,
+//                        edit_name.getText().toString(),
+//                        edit_country.getText().toString(),
+//                        edit_address.getText().toString())
+//                        .enqueue(new Callback<User>() {
+//                            @Override
+//                            public void onResponse(Call<User> call, Response<User> response) {
+//                                watingDialog.dismiss();
+//                                User user = response.body();
+//                                if (TextUtils.isEmpty(user.getError_msg())) {
+//
+//                                    ToastMessage("Register Successfully");
+//                                }
+//
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<User> call, Throwable t) {
+//                                watingDialog.dismiss();
+//                            }
+//                        });
 
             }
             //close dialog
