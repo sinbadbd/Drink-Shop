@@ -65,7 +65,10 @@
         <activity
             android:name=".SignUpActivity"
             android:theme="@style/generalnotitle" />
-        <activity android:name=".HomeActivity"></activity>
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

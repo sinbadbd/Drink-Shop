@@ -5,6 +5,7 @@ import com.sinbaddrinkshop.drinkshop.Model.Result;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface APIService {
@@ -20,4 +21,9 @@ public interface APIService {
     @POST("login")
     Call<Result> userLogin(@Field("email") String email,
                            @Field("password") String password);
+
+    @FormUrlEncoded
+    @GET("user/{email}")
+    Call<Result> userInformation(@Field("email") String email);
+
 }

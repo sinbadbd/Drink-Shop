@@ -50,7 +50,7 @@ public class SplashScreen extends AppCompatActivity {
         //  retrofitClient = new RetrofitClient();
 
 
-        mService = Common.getAPI();
+       // mService = Common.getAPI();
 
         Log.d("api", mService.toString());
 
