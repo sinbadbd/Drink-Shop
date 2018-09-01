@@ -1,7 +1,11 @@
 package com.sinbaddrinkshop.drinkshop.Retrofit;
 
+import com.sinbaddrinkshop.drinkshop.Model.Banner;
 import com.sinbaddrinkshop.drinkshop.Model.Result;
 
+import java.util.List;
+
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -25,5 +29,8 @@ public interface APIService {
     @FormUrlEncoded
     @GET("user/{email}")
     Call<Result> userInformation(@Field("email") String email);
+
+    @GET("getImages")
+    Observable<List<Banner>> getBanners();
 
 }

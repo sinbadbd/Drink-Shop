@@ -13,12 +13,32 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.sinbaddrinkshop.drinkshop.Model.Banner;
+import com.sinbaddrinkshop.drinkshop.Retrofit.APIService;
+import com.sinbaddrinkshop.drinkshop.utils.Common;
 import com.sinbaddrinkshop.drinkshop.utils.SharedPrefManager;
+
+import java.util.HashMap;
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView setName, setEmail;
+
+    SliderLayout sliderLayout;
+
+    //API
+    APIService mApiServices;
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +46,9 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mApiServices = Common.getApiService();
+        sliderLayout = (SliderLayout) findViewById(R.id.slider);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -51,6 +74,41 @@ public class HomeActivity extends AppCompatActivity
         setEmail.setText(SharedPrefManager.getInstance(this).getUser().getEmail());
 
 
+        getBannerImage();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        compositeDisposable.dispose();
+        super.onDestroy();
+    }
+
+    private void getBannerImage() {
+        compositeDisposable.add(mApiServices.getBanners()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<Banner>>() {
+                    @Override
+                    public void accept(List<Banner> banners) throws Exception {
+                        displayImage(banners);
+                    }
+                }));
+    }
+
+    private void displayImage(List<Banner> banners) {
+
+        HashMap<String, String> bannerMap = new HashMap<>();
+        for (Banner item : banners)
+            bannerMap.put(item.getName(), item.getLink());
+
+        for (String name : bannerMap.keySet()) {
+            TextSliderView textSliderView = new TextSliderView(this);
+            textSliderView.description(name)
+                    .image(bannerMap.get(name))
+                    .setScaleType(BaseSliderView.ScaleType.Fit);
+            sliderLayout.addSlider(textSliderView);
+        }
     }
 
     private void logout() {
