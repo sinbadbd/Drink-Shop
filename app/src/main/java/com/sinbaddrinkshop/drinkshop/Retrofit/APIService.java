@@ -1,6 +1,7 @@
 package com.sinbaddrinkshop.drinkshop.Retrofit;
 
 import com.sinbaddrinkshop.drinkshop.Model.Banner;
+import com.sinbaddrinkshop.drinkshop.Model.Category;
 import com.sinbaddrinkshop.drinkshop.Model.Result;
 
 import java.util.List;
@@ -32,5 +33,8 @@ public interface APIService {
 
     @GET("getImages")
     Observable<List<Banner>> getBanners();
+
+    @GET("getMenu")
+    Observable<List<Category>> getMenu();
 
 }

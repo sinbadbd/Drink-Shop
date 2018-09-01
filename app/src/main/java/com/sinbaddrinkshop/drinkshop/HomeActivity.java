@@ -7,6 +7,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +18,9 @@ import android.widget.TextView;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.sinbaddrinkshop.drinkshop.Adapter.CategoryAdapter;
 import com.sinbaddrinkshop.drinkshop.Model.Banner;
+import com.sinbaddrinkshop.drinkshop.Model.Category;
 import com.sinbaddrinkshop.drinkshop.Retrofit.APIService;
 import com.sinbaddrinkshop.drinkshop.utils.Common;
 import com.sinbaddrinkshop.drinkshop.utils.SharedPrefManager;
@@ -36,6 +40,9 @@ public class HomeActivity extends AppCompatActivity
 
     SliderLayout sliderLayout;
 
+
+    RecyclerView list_menu;
+
     //API
     APIService mApiServices;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -49,6 +56,10 @@ public class HomeActivity extends AppCompatActivity
 
         mApiServices = Common.getApiService();
         sliderLayout = (SliderLayout) findViewById(R.id.slider);
+
+        list_menu = (RecyclerView) findViewById(R.id.menu_list);
+        list_menu.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        list_menu.setHasFixedSize(true);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -75,7 +86,25 @@ public class HomeActivity extends AppCompatActivity
 
 
         getBannerImage();
+        getCategoryMenu();
 
+    }
+
+    private void getCategoryMenu() {
+        compositeDisposable.add(mApiServices.getMenu()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<Category>>() {
+                    @Override
+                    public void accept(List<Category> categories) throws Exception {
+                        displayCategoryMenu(categories);
+                    }
+                }));
+    }
+
+    private void displayCategoryMenu(List<Category> categories) {
+        CategoryAdapter categoryAdapter = new CategoryAdapter(this, categories);
+        list_menu.setAdapter(categoryAdapter);
     }
 
     @Override
