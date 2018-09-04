@@ -1,14 +1,17 @@
 package com.sinbaddrinkshop.drinkshop.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sinbaddrinkshop.drinkshop.HomeActivity;
+import com.sinbaddrinkshop.drinkshop.DrinkActivity;
 import com.sinbaddrinkshop.drinkshop.Model.Category;
 import com.sinbaddrinkshop.drinkshop.R;
+import com.sinbaddrinkshop.drinkshop.Retrofit.ItemClickListener;
+import com.sinbaddrinkshop.drinkshop.utils.Common;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -29,13 +32,22 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(CategoryViewHolder holder, int position) {
+    public void onBindViewHolder(CategoryViewHolder holder, final int position) {
 
         //load image
         Picasso.with(context)
                 .load(categories.get(position)
                         .link).into(holder.image_product);
         holder.text_menu_name.setText(categories.get(position).name);
+
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view) {
+                Common.currentCategory = categories.get(position);
+
+                context.startActivity(new Intent(context, DrinkActivity.class));
+            }
+        });
     }
 
     @Override

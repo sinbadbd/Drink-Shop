@@ -1,4 +1,7 @@
 package com.sinbaddrinkshop.drinkshop.Retrofit;
 
-public interface ItemClieckListener {
+import android.view.View;
+
+public interface ItemClickListener {
+    void onClick(View view);
 }
