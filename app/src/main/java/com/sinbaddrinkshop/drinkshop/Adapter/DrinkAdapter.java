@@ -16,6 +16,7 @@ import java.util.List;
 
 public class DrinkAdapter extends RecyclerView.Adapter<DrinkViewHolder> {
 
+
     Context context;
     List<Drink> drinks;
 
@@ -27,8 +28,8 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkViewHolder> {
     @Override
     public DrinkViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View itemView = LayoutInflater.from(context).inflate(R.layout.drink_layout_item, null);
-        return new DrinkViewHolder(itemView);
+        View itemVie = LayoutInflater.from(context).inflate(R.layout.drink_layout_item, null);
+        return new DrinkViewHolder(itemVie);
     }
 
     @Override

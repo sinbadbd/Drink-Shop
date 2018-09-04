@@ -13,6 +13,8 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface APIService {
 
@@ -38,8 +40,7 @@ public interface APIService {
     @GET("getMenu")
     Observable<List<Category>> getMenu();
 
-    @FormUrlEncoded
-    @POST("getMenuId")
-    Observable<List<Drink>> getDrinkById(@Field("menu_id") int menuId);
+    @GET("getMenuId/{menu_id}")
+    Observable<List<Drink>> getDrinkById(@Path("menu_id") int menuId);
 
 }

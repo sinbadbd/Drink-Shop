@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.sinbaddrinkshop.drinkshop.Adapter.DrinkAdapter;
@@ -32,6 +33,9 @@ public class DrinkActivity extends AppCompatActivity {
 
         mApiService = Common.getApiService();
 
+
+        Log.d("Api", mApiService.toString());
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_drink);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setHasFixedSize(true);
@@ -39,19 +43,31 @@ public class DrinkActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.text_menu_name);
         textView.setText(Common.currentCategory.name);
 
-        loadListDrink(Common.currentCategory.id);
+        loadListDrink(Common.currentCategory.getId());
 
     }
 
     private void loadListDrink(int menuId) {
 
+//        compositeDisposable.add(mApiService.getDrinkById(menuId)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<List<Drink>>() {
+//                    @Override
+//                    public void accept(List<Drink> drinks) throws Exception {
+//                        displayDrinkList(drinks);
+//                    }
+//                }));
         compositeDisposable.add(mApiService.getDrinkById(menuId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Drink>>() {
                     @Override
                     public void accept(List<Drink> drinks) throws Exception {
+
                         displayDrinkList(drinks);
+
+                        Log.d("data", drinks.toString());
                     }
                 }));
     }
@@ -60,6 +76,7 @@ public class DrinkActivity extends AppCompatActivity {
         DrinkAdapter drinkAdapter = new DrinkAdapter(this, drinks);
         recyclerView.setAdapter(drinkAdapter);
     }
+
     @Override
     protected void onPostResume() {
         super.onPostResume();
