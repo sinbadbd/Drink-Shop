@@ -47,6 +47,13 @@ public class Drink {
         this.menu_id = menu_id;
     }
 
+    public Drink(){
+
+    }
+    public Drink(int menu_id){
+
+        this.menu_id = menu_id;
+    }
     public Drink(int id, String name, String link, double price, int menu_id) {
 
 

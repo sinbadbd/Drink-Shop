@@ -47,27 +47,17 @@ public class DrinkActivity extends AppCompatActivity {
 
     }
 
+
     private void loadListDrink(int menuId) {
 
-//        compositeDisposable.add(mApiService.getDrinkById(menuId)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Consumer<List<Drink>>() {
-//                    @Override
-//                    public void accept(List<Drink> drinks) throws Exception {
-//                        displayDrinkList(drinks);
-//                    }
-//                }));
+
         compositeDisposable.add(mApiService.getDrinkById(menuId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Drink>>() {
                     @Override
                     public void accept(List<Drink> drinks) throws Exception {
-
                         displayDrinkList(drinks);
-
-                        Log.d("data", drinks.toString());
                     }
                 }));
     }
@@ -77,10 +67,4 @@ public class DrinkActivity extends AppCompatActivity {
         recyclerView.setAdapter(drinkAdapter);
     }
 
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-
-
-    }
 }

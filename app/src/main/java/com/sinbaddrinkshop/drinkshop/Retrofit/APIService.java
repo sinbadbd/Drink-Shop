@@ -40,7 +40,14 @@ public interface APIService {
     @GET("getMenu")
     Observable<List<Category>> getMenu();
 
+    //@FormUrlEncoded
     @GET("getMenuId/{menu_id}")
     Observable<List<Drink>> getDrinkById(@Path("menu_id") int menuId);
+
+//    @FormUrlEncoded
+//    @POST("getMenuId")
+//    Call<List<Drink>> getDrinkById(@Field("menu_id") int menuId);
+
+
 
 }

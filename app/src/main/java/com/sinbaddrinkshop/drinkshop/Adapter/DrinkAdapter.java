@@ -28,8 +28,8 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkViewHolder> {
     @Override
     public DrinkViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View itemVie = LayoutInflater.from(context).inflate(R.layout.drink_layout_item, null);
-        return new DrinkViewHolder(itemVie);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.drink_layout_item, null);
+        return new DrinkViewHolder(itemView);
     }
 
     @Override
