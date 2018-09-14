@@ -19,4 +19,27 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="action_Logout">Logout</string>
+    <string name="textView_add_to_cart_milk_tea">Tea</string>
+    <string name="edt_add_to_cart_comment">Comments</string>
+    <string name="textView_add_to_cart_choose_size">Choose Size</string>
+    <string name="textView_add_to_cart_required">Required</string>
+    <string name="radioButton_size_m">Size M</string>
+    <string name="radioButton_size_l">Size L</string>
+    <string name="textView_0">$0</string>
+    <string name="textView_3">$3</string>
+    <string name="textView_add_to_cart_choose_sugar">Choose Sugar</string>
+    <string name="txt_add_to_cart_required">Required</string>
+    <string name="add_to_cart_100">100</string>
+    <string name="add_to_cart_70">70</string>
+    <string name="add_to_cart_50">50</string>
+    <string name="add_to_cart_30">30</string>
+    <string name="add_to_cart_free">Free</string>
+    <string name="add_to_cart_choose_ice">Choose Ice</string>
+    <string name="add_to_cart_required">Required</string>
+    <string name="add_to_cart_ice_100">100</string>
+    <string name="add_to_cart_ice_70">70</string>
+    <string name="add_to_cart_ice_50">50</string>
+    <string name="add_to_cart_ice_30">30</string>
+    <string name="add_to_cart_ice_free">Free</string>
+    <string name="add_to_cart_topping">Cart Shopping</string>
 </resources>
