@@ -21,6 +21,7 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.sinbaddrinkshop.drinkshop.Adapter.CategoryAdapter;
 import com.sinbaddrinkshop.drinkshop.Model.Banner;
 import com.sinbaddrinkshop.drinkshop.Model.Category;
+import com.sinbaddrinkshop.drinkshop.Model.Drink;
 import com.sinbaddrinkshop.drinkshop.Retrofit.APIService;
 import com.sinbaddrinkshop.drinkshop.utils.Common;
 import com.sinbaddrinkshop.drinkshop.utils.SharedPrefManager;
@@ -88,6 +89,22 @@ public class HomeActivity extends AppCompatActivity
         getBannerImage();
         getCategoryMenu();
 
+
+        //save newest topping
+        getToppingList();
+
+    }
+
+    private void getToppingList() {
+        compositeDisposable.add(mApiServices.getDrinkById(Common.TOPPING_ID)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<Drink>>() {
+                    @Override
+                    public void accept(List<Drink> drinks) throws Exception {
+                        Common.ToppingList = drinks;
+                    }
+                }));
     }
 
     private void getCategoryMenu() {

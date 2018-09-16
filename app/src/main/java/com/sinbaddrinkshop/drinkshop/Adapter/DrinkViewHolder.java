@@ -31,7 +31,6 @@ public class DrinkViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
         buttonAddToCart = (Button) itemView.findViewById(R.id.buttonAddToCart);
 
-
         itemView.setOnClickListener(this);
     }
 

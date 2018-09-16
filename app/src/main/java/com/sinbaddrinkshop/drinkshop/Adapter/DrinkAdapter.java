@@ -3,6 +3,7 @@ package com.sinbaddrinkshop.drinkshop.Adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,6 +91,14 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkViewHolder> {
         RadioButton rdi_ice_30 = (RadioButton) itemView.findViewById(R.id.rdi_ice_30);
         RadioButton rdi_ice_free = (RadioButton) itemView.findViewById(R.id.rdi_ice_free);
 
+        RecyclerView recycler_topping = (RecyclerView) itemView.findViewById(R.id.recycler_topping);
+        recycler_topping.setLayoutManager(new LinearLayoutManager(context));
+        recycler_topping.setHasFixedSize(true);
+
+
+        MultiChoiceAdapter multiChoiceAdapter = new MultiChoiceAdapter(context, Common.ToppingList);
+        recycler_topping.setAdapter(multiChoiceAdapter);
+
 
         Picasso.with(context).load(drinks.get(position).getLink())
                 .into(img_cart_product);
@@ -100,11 +109,30 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkViewHolder> {
         builder.setNegativeButton("Add TO CART", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                if (Common.sizeOfCup == -1) {
+                    Common.ToastMessage(context, "Please Choose size if Cup");
+                    return;
+                }
+                if (Common.ice == -1) {
+                    Common.ToastMessage(context, "Please Choose size if Ice");
+                    return;
+                }
+                if (Common.suger == -1) {
+                    Common.ToastMessage(context, "Please Choose size if Sugar");
+                    return;
+                }
+                showConfirmDialog();
                 dialog.dismiss();
+
             }
         });
 
         builder.show();
+    }
+
+    private void showConfirmDialog() {
+
     }
 
     @Override

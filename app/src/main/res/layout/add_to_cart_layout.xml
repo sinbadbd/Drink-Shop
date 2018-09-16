@@ -40,8 +40,8 @@
 
                 <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
                     android:id="@+id/txt_count"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
                     android:layout_alignParentRight="true"
                     app:backGroundColor="@color/colorAccent"
                     app:finalNumber="100"
@@ -308,7 +308,7 @@
 
             </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
+             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_topping"
                 android:background="@android:color/white"
                 android:layout_width="match_parent"
