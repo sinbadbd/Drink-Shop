@@ -34,6 +34,7 @@ public class MultiChoiceAdapter extends RecyclerView.Adapter<MultiChoiceAdapter.
     @Override
     public void onBindViewHolder(MultiChoiceViewHolder holder, final int position) {
         holder.checkBox.setText(optionList.get(position).getName());
+
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
