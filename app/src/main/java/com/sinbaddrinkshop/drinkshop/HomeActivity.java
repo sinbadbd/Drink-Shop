@@ -23,6 +23,9 @@ import com.sinbaddrinkshop.drinkshop.Model.Banner;
 import com.sinbaddrinkshop.drinkshop.Model.Category;
 import com.sinbaddrinkshop.drinkshop.Model.Drink;
 import com.sinbaddrinkshop.drinkshop.Retrofit.APIService;
+import com.sinbaddrinkshop.drinkshop.database.DataSource.CartRepository;
+import com.sinbaddrinkshop.drinkshop.database.Local.CartDatabase;
+import com.sinbaddrinkshop.drinkshop.database.Local.CartDatasource;
 import com.sinbaddrinkshop.drinkshop.utils.Common;
 import com.sinbaddrinkshop.drinkshop.utils.SharedPrefManager;
 
@@ -93,6 +96,16 @@ public class HomeActivity extends AppCompatActivity
         //save newest topping
         getToppingList();
 
+        //save database
+        initDb();
+
+
+    }
+
+    public void initDb() {
+
+        Common.cartDatasource = CartDatabase.getInstance(this);
+        Common.cartRepository = CartRepository.getInstance(CartDatasource.getInstance(Common.cartDatasource.cartDAO()));
     }
 
     private void getToppingList() {

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.google.gson.Gson;
 import com.sinbaddrinkshop.drinkshop.Model.Drink;
 import com.sinbaddrinkshop.drinkshop.R;
 import com.sinbaddrinkshop.drinkshop.Retrofit.ItemClickListener;
+import com.sinbaddrinkshop.drinkshop.database.Model.Cart;
 import com.sinbaddrinkshop.drinkshop.utils.Common;
 import com.squareup.picasso.Picasso;
 
@@ -225,11 +229,11 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkViewHolder> {
         View view = LayoutInflater.from(context).inflate(R.layout.confirm_add_to_cart_layout, null);
 
         ImageView img_product = (ImageView) view.findViewById(R.id.img_product);
-        TextView txt_cart_product_name = (TextView) view.findViewById(R.id.txt_cart_product_name);
+        final TextView txt_cart_product_name = (TextView) view.findViewById(R.id.txt_cart_product_name);
         TextView txt_cart_product_price = (TextView) view.findViewById(R.id.txt_cart_product_price);
         TextView txt_sugar = (TextView) view.findViewById(R.id.txt_sugar);
         TextView txt_ice = (TextView) view.findViewById(R.id.txt_ice);
-        TextView txt_topping_extra = (TextView) view.findViewById(R.id.txt_topping_extra);
+        final TextView txt_topping_extra = (TextView) view.findViewById(R.id.txt_topping_extra);
 
         Picasso.with(context).load(drinks.get(position).getLink()).into(img_product);
         txt_cart_product_name.setText(new StringBuilder(drinks.get(position).getName()));
@@ -251,11 +255,31 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkViewHolder> {
 
         txt_topping_extra.setText(tapping_final_comment);
 
+        final double finalPrice = price;
         builder.setNegativeButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
                 dialog.dismiss();
+
+                try {
+
+                    Cart cartItem = new Cart();
+                    cartItem.name = txt_cart_product_name.getText().toString();
+                    cartItem.amount = String.valueOf(Integer.parseInt(number));
+                    cartItem.price = finalPrice;
+                    cartItem.ice = Common.ice;
+                    cartItem.sugar = Common.suger;
+                  //  cartItem.toppingExtras = Integer.parseInt(txt_topping_extra.getText().toString());
+
+
+                    Common.cartRepository.insertCart(cartItem);
+                    Log.d("data", new Gson().toJson(cartItem));
+                    Toast.makeText(context, "Save item to cart success", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

@@ -7,6 +7,9 @@ import com.sinbaddrinkshop.drinkshop.Model.Category;
 import com.sinbaddrinkshop.drinkshop.Model.Drink;
 import com.sinbaddrinkshop.drinkshop.Retrofit.APIService;
 import com.sinbaddrinkshop.drinkshop.Retrofit.RetrofitClient;
+import com.sinbaddrinkshop.drinkshop.database.DataSource.CartRepository;
+import com.sinbaddrinkshop.drinkshop.database.Local.CartDatabase;
+import com.sinbaddrinkshop.drinkshop.database.Local.CartDatasource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +32,11 @@ public class Common {
     public static int sizeOfCup = -1;
     public static int suger = -1;
     public static int ice = -1;
+
+
+    public static CartRepository cartRepository;
+    public static CartDatabase cartDatasource;
+
 
     public static APIService getApiService() {
         return RetrofitClient.getClient(BASE_URL).create(APIService.class);
