@@ -8,8 +8,8 @@ import com.sinbaddrinkshop.drinkshop.Model.Drink;
 import com.sinbaddrinkshop.drinkshop.Retrofit.APIService;
 import com.sinbaddrinkshop.drinkshop.Retrofit.RetrofitClient;
 import com.sinbaddrinkshop.drinkshop.database.DataSource.CartRepository;
-import com.sinbaddrinkshop.drinkshop.database.Local.CartDatabase;
-import com.sinbaddrinkshop.drinkshop.database.Local.CartDatasource;
+import com.sinbaddrinkshop.drinkshop.database.DataSource.FavoriteRepository;
+import com.sinbaddrinkshop.drinkshop.database.Local.RoomDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +34,9 @@ public class Common {
     public static int ice = -1;
 
 
+    public static RoomDatabase roomDatabase;
     public static CartRepository cartRepository;
-    public static CartDatabase cartDatasource;
+    public static FavoriteRepository favoriteRepository;
 
 
     public static APIService getApiService() {

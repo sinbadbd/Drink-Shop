@@ -26,8 +26,10 @@ import com.sinbaddrinkshop.drinkshop.Model.Category;
 import com.sinbaddrinkshop.drinkshop.Model.Drink;
 import com.sinbaddrinkshop.drinkshop.Retrofit.APIService;
 import com.sinbaddrinkshop.drinkshop.database.DataSource.CartRepository;
-import com.sinbaddrinkshop.drinkshop.database.Local.CartDatabase;
+import com.sinbaddrinkshop.drinkshop.database.DataSource.FavoriteRepository;
 import com.sinbaddrinkshop.drinkshop.database.Local.CartDatasource;
+import com.sinbaddrinkshop.drinkshop.database.Local.FavoriteDatasource;
+import com.sinbaddrinkshop.drinkshop.database.Local.RoomDatabase;
 import com.sinbaddrinkshop.drinkshop.utils.Common;
 import com.sinbaddrinkshop.drinkshop.utils.SharedPrefManager;
 
@@ -111,8 +113,12 @@ public class HomeActivity extends AppCompatActivity
 
     public void initDb() {
 
-        Common.cartDatasource = CartDatabase.getInstance(this);
-        Common.cartRepository = CartRepository.getInstance(CartDatasource.getInstance(Common.cartDatasource.cartDAO()));
+        Common.roomDatabase = RoomDatabase.getInstance(this);
+        Common.cartRepository = CartRepository
+                .getInstance(CartDatasource.getInstance(Common.roomDatabase.cartDAO()));
+
+        Common.favoriteRepository = FavoriteRepository
+                .getInstance(FavoriteDatasource.getInstance(Common.roomDatabase.favoriteDAO()));
     }
 
     private void getToppingList() {
