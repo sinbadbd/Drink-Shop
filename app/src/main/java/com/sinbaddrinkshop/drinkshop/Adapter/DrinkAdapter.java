@@ -270,7 +270,8 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkViewHolder> {
                     cartItem.price = finalPrice;
                     cartItem.ice = Common.ice;
                     cartItem.sugar = Common.suger;
-                  //  cartItem.toppingExtras = Integer.parseInt(txt_topping_extra.getText().toString());
+                    cartItem.toppingExtras = txt_topping_extra.getText().length();
+                    cartItem.link = drinks.get(position).getLink();
 
 
                     Common.cartRepository.insertCart(cartItem);

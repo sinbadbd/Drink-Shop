@@ -13,11 +13,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.nex3z.notificationbadge.NotificationBadge;
 import com.sinbaddrinkshop.drinkshop.Adapter.CategoryAdapter;
 import com.sinbaddrinkshop.drinkshop.Model.Banner;
 import com.sinbaddrinkshop.drinkshop.Model.Category;
@@ -46,6 +48,11 @@ public class HomeActivity extends AppCompatActivity
 
 
     RecyclerView list_menu;
+
+
+    NotificationBadge badge;
+
+    ImageView cart_icon;
 
     //API
     APIService mApiServices;
@@ -190,8 +197,37 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_action_bar, menu);
+        View view = menu.findItem(R.id.cart_menu).getActionView();
+        badge = (NotificationBadge) view.findViewById(R.id.badge);
+        cart_icon = (ImageView) view.findViewById(R.id.cart_icon);
+
+        cart_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), CartActivity.class));
+            }
+        });
         getMenuInflater().inflate(R.menu.home, menu);
+
+        updateCurCount();
+
         return true;
+    }
+
+    private void updateCurCount() {
+        if (badge == null) return;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (Common.cartRepository.countCartItem() == 0) {
+                    badge.setVisibility(View.INVISIBLE);
+                } else {
+                    badge.setVisibility(View.VISIBLE);
+                    badge.setText(String.valueOf(Common.cartRepository.countCartItem()));
+                }
+            }
+        });
     }
 
     @Override
@@ -216,7 +252,7 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.cart_menu) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -233,5 +269,11 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        updateCurCount();
     }
 }
