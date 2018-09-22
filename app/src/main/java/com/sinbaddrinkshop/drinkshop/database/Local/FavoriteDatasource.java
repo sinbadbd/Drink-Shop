@@ -28,9 +28,15 @@ public class FavoriteDatasource implements IFavoriteDataSource {
         return favoriteDAO.getFavItem();
     }
 
+
     @Override
     public int isFavorite(int itemId) {
         return favoriteDAO.isFavorite(itemId);
+    }
+
+    @Override
+    public void insertFav(Favorite... favorites) {
+        favoriteDAO.insertFav(favorites);
     }
 
     @Override

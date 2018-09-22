@@ -6,8 +6,9 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import com.sinbaddrinkshop.drinkshop.database.Model.Cart;
+import com.sinbaddrinkshop.drinkshop.database.Model.Favorite;
 
-@Database(entities = {Cart.class}, version = 1)
+@Database(entities = {Cart.class, Favorite.class}, version = 1)
 
 public abstract class RoomDatabase extends android.arch.persistence.room.RoomDatabase {
 

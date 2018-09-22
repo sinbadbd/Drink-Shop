@@ -22,6 +22,7 @@ import com.sinbaddrinkshop.drinkshop.Model.Drink;
 import com.sinbaddrinkshop.drinkshop.R;
 import com.sinbaddrinkshop.drinkshop.Retrofit.ItemClickListener;
 import com.sinbaddrinkshop.drinkshop.database.Model.Cart;
+import com.sinbaddrinkshop.drinkshop.database.Model.Favorite;
 import com.sinbaddrinkshop.drinkshop.utils.Common;
 import com.squareup.picasso.Picasso;
 
@@ -46,7 +47,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(DrinkViewHolder holder, final int position) {
+    public void onBindViewHolder(final DrinkViewHolder holder, final int position) {
 
 
         holder.text_price.setText(new StringBuilder("TK").append(drinks.get(position).getPrice()));
@@ -59,6 +60,26 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkViewHolder> {
             }
         });
 
+        if (Common.favoriteRepository.isFavorite(drinks.get(position).getId()) == 1)
+            holder.btn_favorite.setImageResource(R.drawable.ic_favorite_black_24dp);
+        else
+            holder.btn_favorite.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+
+
+        holder.btn_favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Common.favoriteRepository.isFavorite(drinks.get(position).getId()) != 1) {
+                    addOrRemoveFavorit(drinks.get(position), true);
+                    holder.btn_favorite.setImageResource(R.drawable.ic_favorite_black_24dp);
+                } else {
+                    addOrRemoveFavorit(drinks.get(position), false);
+                    holder.btn_favorite.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                }
+
+            }
+        });
+
         Picasso.with(context)
                 .load(drinks.get(position).getLink()).into(holder.menu_image);
 
@@ -68,8 +89,20 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkViewHolder> {
                 Common.ToastMessage(context, "Click");
             }
         });
+    }
 
+    private void addOrRemoveFavorit(Drink drink, boolean isAdd) {
 
+        Favorite favorite = new Favorite();
+        favorite.id = drink.getId();
+        favorite.name = drink.getName();
+        favorite.link = drink.getLink();
+        favorite.price = drink.getPrice();
+        favorite.menuId = drink.getMenu_id();
+        if (isAdd)
+            Common.favoriteRepository.insertFav(favorite);
+        else
+            Common.favoriteRepository.delete(favorite);
     }
 
     private void showAddToCartDialog(final int position) {
