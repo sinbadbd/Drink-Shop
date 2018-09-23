@@ -260,20 +260,20 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.cart_menu) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_favorite) {
+            startActivity(new Intent(getApplicationContext(), FavoriteListActivity.class));
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
         return true;
     }
 
