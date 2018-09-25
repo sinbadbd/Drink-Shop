@@ -70,8 +70,9 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DrinkActivity" />
-        <activity android:name=".CartActivity"></activity>
-        <activity android:name=".FavoriteListActivity"></activity>
+        <activity android:name=".CartActivity" />
+        <activity android:name=".FavoriteListActivity" />
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>

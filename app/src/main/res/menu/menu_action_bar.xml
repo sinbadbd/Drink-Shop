@@ -10,5 +10,9 @@
         android:title="Cart"
         app:showAsAction="always" />
 
-
+    <item
+        android:id="@+id/search_bar"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Seatch"
+        app:showAsAction="always" />
 </menu>

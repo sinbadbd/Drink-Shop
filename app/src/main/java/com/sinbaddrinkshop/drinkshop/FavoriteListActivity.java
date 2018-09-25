@@ -34,7 +34,7 @@ public class FavoriteListActivity extends AppCompatActivity implements RecyclerI
 
     List<Favorite> localFavorite = new ArrayList<>();
 
-RelativeLayout rootLayout;
+    RelativeLayout rootLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

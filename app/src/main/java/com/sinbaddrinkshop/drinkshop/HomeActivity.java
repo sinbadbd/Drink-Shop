@@ -244,8 +244,11 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_Logout) {
-            logout();
+        if (id == R.id.cart_menu) {
+
+            return true;
+        } else if (id == R.id.search_bar) {
+            startActivity(new Intent(getApplicationContext(), SearchActivity.class));
             return true;
         }
 
@@ -263,6 +266,8 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_favorite) {
             startActivity(new Intent(getApplicationContext(), FavoriteListActivity.class));
 
+        } else if (id == R.id.nav_signout) {
+            logout();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -272,7 +277,7 @@ public class HomeActivity extends AppCompatActivity
 
 
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return true;
     }

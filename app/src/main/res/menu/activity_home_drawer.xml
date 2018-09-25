@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_favorite_black_24dp"
             android:title="Favorite" />
 
+        <item
+            android:id="@+id/nav_signout"
+            android:icon="@drawable/logout"
+            android:title="Signout" />
     </group>
 
 
