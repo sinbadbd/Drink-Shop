@@ -1,5 +1,6 @@
 package com.sinbaddrinkshop.drinkshop;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -7,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.sinbaddrinkshop.drinkshop.Adapter.FavoriteListAdapter;
 import com.sinbaddrinkshop.drinkshop.database.Model.Favorite;
@@ -31,6 +34,7 @@ public class FavoriteListActivity extends AppCompatActivity implements RecyclerI
 
     List<Favorite> localFavorite = new ArrayList<>();
 
+RelativeLayout rootLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +43,7 @@ public class FavoriteListActivity extends AppCompatActivity implements RecyclerI
 
 
         recycler_cart = (RecyclerView) findViewById(R.id.recycler_cart);
+        rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
         recycler_cart.setLayoutManager(new LinearLayoutManager(this));
         recycler_cart.setHasFixedSize(true);
 
@@ -89,15 +94,32 @@ public class FavoriteListActivity extends AppCompatActivity implements RecyclerI
 
             String name = localFavorite.get(viewHolder.getAdapterPosition()).name;
 
-            Favorite deleteItem = localFavorite.get(viewHolder.getAdapterPosition());
+            final Favorite deleteItem = localFavorite.get(viewHolder.getAdapterPosition());
 
-            int deleteIndex = viewHolder.getAdapterPosition();
+            final int deleteIndex = viewHolder.getAdapterPosition();
 
             favoriteListAdapter.removeItem(deleteIndex);
 
             Common.favoriteRepository.delete(deleteItem);
 
-           /// Snackbar snackbar = Snackbar.make(rootLayout, new StringBuilder(name).append("Remove Item").toString())
+            Snackbar snackbar = Snackbar.make(rootLayout, new StringBuilder(name)
+                    .append("Remove Item")
+                    .toString(), Snackbar.LENGTH_LONG);
+
+
+            snackbar.setAction("Undo", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    favoriteListAdapter.restoreItem(deleteItem, deleteIndex);
+                    Common.favoriteRepository.insertFav(deleteItem);
+                }
+            });
+
+            snackbar.setActionTextColor(Color.BLUE);
+            snackbar.show();
+
+
         }
 
     }

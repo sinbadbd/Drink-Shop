@@ -1,5 +1,6 @@
 package com.sinbaddrinkshop.drinkshop.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -53,15 +54,16 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
 
         ImageView img_product;
         TextView txt_product_name, txt_price;
-        public View view_foreground, view_background;
+        public RelativeLayout view_background;
+        public LinearLayout view_foreground;
 
         public FavoriteListViewHolder(View itemView) {
             super(itemView);
             img_product = (ImageView) itemView.findViewById(R.id.img_product);
             txt_product_name = (TextView) itemView.findViewById(R.id.txt_product_name);
             txt_price = (TextView) itemView.findViewById(R.id.txt_price);
-            view_foreground = (RelativeLayout) itemView.findViewById(R.id.view_foreground);
-            view_foreground = (LinearLayout) itemView.findViewById(R.id.view_background);
+            view_background = (RelativeLayout) itemView.findViewById(R.id.view_background);
+            view_foreground = (LinearLayout) itemView.findViewById(R.id.view_foreground);
         }
     }
 
