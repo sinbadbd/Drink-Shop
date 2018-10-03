@@ -15,18 +15,20 @@ import io.reactivex.Flowable;
 @Dao
 public interface CartDAO {
 
-    @Query("SELECT * FROM CART")
+    @Query("SELECT * FROM Cart")
     Flowable<List<Cart>> getCartItems();
 
     @Query("SELECT * FROM CART WHERE id=:cartItemId")
     Flowable<List<Cart>> getCartItemsById(int cartItemId);
 
 
-    @Query("SELECT COUNT(*) FROM CART")
+    @Query("SELECT COUNT(*) FROM Cart")
     int countCartItem();
 
+    @Query("SELECT sum(price) FROM Cart")
+    float cartPrice();
 
-    @Query("DELETE FROM CART")
+    @Query("DELETE FROM Cart")
     void emptyCart();
 
     @Insert

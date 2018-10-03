@@ -14,6 +14,8 @@ public interface ICartDataSource {
 
     int countCartItem();
 
+    float cartPrice();
+
     void emptyCart();
 
     void insertCart(Cart... carts);

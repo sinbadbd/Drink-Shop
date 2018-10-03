@@ -3,6 +3,7 @@ package com.sinbaddrinkshop.drinkshop.Retrofit;
 import com.sinbaddrinkshop.drinkshop.Model.Banner;
 import com.sinbaddrinkshop.drinkshop.Model.Category;
 import com.sinbaddrinkshop.drinkshop.Model.Drink;
+import com.sinbaddrinkshop.drinkshop.Model.Order;
 import com.sinbaddrinkshop.drinkshop.Model.Result;
 
 import java.util.List;
@@ -14,7 +15,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface APIService {
 
@@ -49,10 +49,19 @@ public interface APIService {
     Observable<List<Drink>> getSearch();
 
 
+    @FormUrlEncoded
+    @POST("orderSave")
+    Call<Order> submitOrder(@Field("order_price") float order_price,
+                            @Field("order_details") String order_details,
+                            @Field("order_comments") String order_comments,
+                            @Field("order_address") String order_address,
+                            @Field("email") String email);
+
+
+
 //    @FormUrlEncoded
 //    @POST("getMenuId")
 //    Call<List<Drink>> getDrinkById(@Field("menu_id") int menuId);
-
 
 
 }

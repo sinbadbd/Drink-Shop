@@ -30,6 +30,10 @@ public class User {
         this.gender = gender;
     }
 
+    public User() {
+
+    }
+
     public int getId() {
         return id;
     }

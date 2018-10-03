@@ -40,8 +40,15 @@ public class CartDatasource implements ICartDataSource {
     }
 
     @Override
+    public float cartPrice() {
+        return cartDAO.cartPrice();
+    }
+
+    @Override
     public void emptyCart() {
 
+        cartDAO.emptyCart();
+       // return cartDAO.emptyCart();
     }
 
     @Override
@@ -57,6 +64,6 @@ public class CartDatasource implements ICartDataSource {
     @Override
     public void deleteCartByItem(Cart... carts) {
 
-        cartDAO.deleteCartByItem(carts );
+        cartDAO.deleteCartByItem(carts);
     }
 }
